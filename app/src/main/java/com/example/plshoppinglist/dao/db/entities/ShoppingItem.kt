@@ -1,4 +1,4 @@
-package com.example.plshoppinglist
+package com.example.plshoppinglist.dao.db.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

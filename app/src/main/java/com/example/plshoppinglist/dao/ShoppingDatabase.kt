@@ -1,9 +1,10 @@
-package com.example.plshoppinglist
+package com.example.plshoppinglist.dao
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.plshoppinglist.dao.db.entities.ShoppingItem
 
 @Database(
     entities = [ShoppingItem::class],
