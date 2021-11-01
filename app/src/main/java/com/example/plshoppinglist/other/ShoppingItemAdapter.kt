@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plshoppinglist.R
 import com.example.plshoppinglist.dao.db.entities.ShoppingItem
 import com.example.plshoppinglist.ui.shoppinglist.ShoppingViewModel
-import kotlinx.android.synthetic.main.shopping_item.view.*
+//import kotlinx.android.synthetic.main.shopping_item.view.*
 
 class ShoppingItemAdapter(
     var items: List<ShoppingItem>,

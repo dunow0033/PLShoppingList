@@ -8,7 +8,8 @@ import com.example.plshoppinglist.dao.db.entities.ShoppingItem
 
 @Database(
     entities = [ShoppingItem::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class ShoppingDatabase: RoomDatabase() {
 
