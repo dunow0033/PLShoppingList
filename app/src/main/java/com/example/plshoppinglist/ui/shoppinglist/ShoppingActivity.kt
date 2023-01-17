@@ -9,18 +9,19 @@ import com.example.plshoppinglist.R
 import com.example.plshoppinglist.dao.ShoppingDatabase
 import com.example.plshoppinglist.dao.db.entities.ShoppingItem
 import com.example.plshoppinglist.dao.repositories.ShoppingRepository
-import com.example.plshoppinglist.databinding.ActivityShoppingBinding
+//import com.example.plshoppinglist.databinding.ActivityShoppingBinding
 import com.example.plshoppinglist.other.ShoppingItemAdapter
-//import kotlinx.android.synthetic.main.activity_shopping.*
+import kotlinx.android.synthetic.main.activity_shopping.*
 
 class ShoppingActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityShoppingBinding
+    //private lateinit var binding: ActivityShoppingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityShoppingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        //binding = ActivityShoppingBinding.inflate(layoutInflater)
+        //setContentView(binding.root)
+        setContentView(R.layout.activity_shopping)
 
         val database = ShoppingDatabase(this)
         val repository = ShoppingRepository(database)
@@ -30,15 +31,15 @@ class ShoppingActivity : AppCompatActivity() {
 
         val adapter = ShoppingItemAdapter(listOf(), viewModel)
 
-        binding.rvShoppingItems.layoutManager = LinearLayoutManager(this)
-        binding.rvShoppingItems.adapter = adapter
+        rvShoppingItems.layoutManager = LinearLayoutManager(this)
+        rvShoppingItems.adapter = adapter
 
         viewModel.getAllShoppingItems().observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })
 
-        binding.fab.setOnClickListener{
+        fab.setOnClickListener{
             AddShoppingItemDialog(this,
                 object : AddDialogListener {
                     override fun onAddButtonClicked(item: ShoppingItem) {

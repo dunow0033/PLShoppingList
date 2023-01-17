@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plshoppinglist.R
 import com.example.plshoppinglist.dao.db.entities.ShoppingItem
-import com.example.plshoppinglist.databinding.ShoppingItemBinding
 import com.example.plshoppinglist.ui.shoppinglist.ShoppingViewModel
-//import kotlinx.android.synthetic.main.shopping_item.view.*
+import kotlinx.android.synthetic.main.shopping_item.view.*
 
 class ShoppingItemAdapter(
     var items: List<ShoppingItem>,
@@ -16,31 +15,30 @@ class ShoppingItemAdapter(
 ): RecyclerView.Adapter<ShoppingItemAdapter.ShoppingViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingViewHolder {
-        return ShoppingViewHolder(
-            ShoppingItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.shopping_item, parent, false)
+        return ShoppingViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
     }
 
     override fun onBindViewHolder(holder: ShoppingViewHolder, position: Int) {
         val curShoppingItem = items[position]
 
-        holder.binding.tvName.text = curShoppingItem.name
-        holder.binding.tvAmount.text = "${curShoppingItem.name}"
+        holder.itemView.tvName.text = curShoppingItem.name
+        holder.itemView.tvAmount.text = "${curShoppingItem.amount}"
 
-        holder.binding.ivDelete.setOnClickListener {
+        holder.itemView.ivDelete.setOnClickListener {
             viewModel.delete(curShoppingItem)
         }
 
-        holder.binding.ivPlus.setOnClickListener {
+        holder.itemView.ivPlus.setOnClickListener {
             curShoppingItem.amount++
             viewModel.upsert(curShoppingItem)
         }
 
-        holder.binding.ivMinus.setOnClickListener {
+        holder.itemView.ivMinus.setOnClickListener {
             if(curShoppingItem.amount > 0) {
                 curShoppingItem.amount--
                 viewModel.upsert(curShoppingItem)
@@ -48,9 +46,5 @@ class ShoppingItemAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
-    class ShoppingViewHolder(val binding: ShoppingItemBinding): RecyclerView.ViewHolder(binding.root)
+    inner class ShoppingViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 }
